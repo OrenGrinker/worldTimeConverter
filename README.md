@@ -1,24 +1,29 @@
 # World Time Converter
 
-A comprehensive TypeScript package for handling worldwide time conversions, business hours calculations, and timezone management.
+![npm Version](https://img.shields.io/npm/v/world-time-converter)
+![TypeScript](https://img.shields.io/npm/types/world-time-converter)
+![License](https://img.shields.io/npm/l/world-time-converter)
+![Downloads](https://img.shields.io/npm/dm/world-time-converter)
+![Node Version](https://img.shields.io/node/v/world-time-converter)
 
-## Installation
+A powerful TypeScript library for handling worldwide time conversions, business hours calculations, and timezone management. Perfect for applications dealing with international time coordination, business hours overlap, and holiday scheduling.
+
+## 🌟 Key Features
+
+- 🌍 **Global Timezone Support**: Convert times between any cities worldwide
+- 💼 **Business Hours Management**: Calculate working hours overlap across timezones
+- 📅 **Holiday Handling**: Manage holidays and business days
+- ⚡ **DST Aware**: Automatic handling of Daylight Saving Time transitions
+- 🔍 **Type Safety**: Full TypeScript support with comprehensive type definitions
+- 🌐 **Locale Support**: Format dates and times according to different locales
+
+## 📦 Installation
 
 ```bash
 npm install world-time-converter
 ```
 
-## Features
-
-- Get current time for any city worldwide
-- Convert timestamps between cities
-- Compare times between cities
-- Calculate working hours overlap
-- Manage holidays and business days
-- Get timezone differences
-- Format times with locale support
-
-## Usage Examples
+## 🚀 Quick Start
 
 ### Basic Time Operations
 
@@ -43,30 +48,20 @@ console.log(londonTime);
 }
 */
 
-// Convert time between cities
-const timestamp = '2024-03-15T14:30:00Z';
+// Convert between cities
 const tokyoTime = WorldTimeConverter.convertTime(
-  timestamp,
+  '2024-03-15T14:30:00Z',
   'London',
   'Tokyo'
 );
-console.log(tokyoTime);
-/* Output:
-{
-  cityName: 'Tokyo',
-  timezone: 'Asia/Tokyo',
-  localTime: '23:30:00',
-  utcOffset: '+09:00',
-  date: '2024-03-15',
-  ...
-}
-*/
 ```
 
-### Comparing Times Between Cities
+## 💡 Advanced Usage
+
+### 🕒 Time Comparison
 
 ```typescript
-// Compare times between two cities
+// Compare times between cities
 const comparison = WorldTimeConverter.compareTimeBetweenCities('London', 'Tokyo');
 console.log(comparison);
 /* Output:
@@ -79,24 +74,11 @@ console.log(comparison);
   minutesDifference: 0
 }
 */
-
-// Get timezone difference
-const difference = WorldTimeConverter.getTimezoneDifference('London', 'Tokyo');
-console.log(difference);
-/* Output:
-{
-  hours: 8,
-  minutes: 0,
-  isAhead: true,
-  formattedDifference: '8h 0m'
-}
-*/
 ```
 
-### Working Hours and Business Days
+### 💼 Business Hours Management
 
 ```typescript
-// Find working hours overlap
 const businessHours1 = {
   start: '09:00',
   end: '17:00',
@@ -115,43 +97,17 @@ const overlap = WorldTimeConverter.findWorkingHoursOverlap(
   businessHours1,
   businessHours2
 );
-console.log(overlap);
-/* Output:
-{
-  startTime: '09:00',
-  endTime: '17:00',
-  overlapDuration: { hours: 2, minutes: 0 },
-  hasOverlap: true,
-  overlapStartCity1: '09:00',
-  overlapEndCity1: '11:00',
-  overlapStartCity2: '17:00',
-  overlapEndCity2: '19:00',
-  workingDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-}
-*/
 
-// Get next business day
-const nextBusinessDay = WorldTimeConverter.getNextBusinessDay('London', true, true);
-console.log(nextBusinessDay);
-/* Output:
-{
-  cityName: 'London',
-  date: '2024-03-18', // Next Monday if current day is Friday
-  ...
-}
-*/
-
-// Calculate business days between dates
+// Calculate business days
 const businessDays = WorldTimeConverter.getBusinessDaysBetween(
   'London',
   '2024-03-01',
   '2024-03-15',
   true  // Skip holidays
 );
-console.log(businessDays); // Output: 11
 ```
 
-### Holiday Management
+### 📅 Holiday Management
 
 ```typescript
 // Add a holiday
@@ -164,59 +120,11 @@ const holiday = {
 
 WorldTimeConverter.addHoliday('London', holiday);
 
-// Check if a date is a holiday
-const isHoliday = WorldTimeConverter.isHoliday('London', moment('2024-12-25'));
-console.log(isHoliday); // Output: true
-
-// Get all holidays for a city
-const holidays = WorldTimeConverter.getHolidays('London');
-console.log(holidays);
-/* Output:
-[
-  {
-    name: 'Christmas Day',
-    date: '2024-12-25',
-    recurring: true,
-    type: 'public'
-  }
-]
-*/
+// Check if date is holiday
+const isHoliday = WorldTimeConverter.isHoliday('London', '2024-12-25');
 ```
 
-### Timezone Information
-
-```typescript
-// Get city timezone information
-const cityInfo = WorldTimeConverter.getCityInfo('London');
-console.log(cityInfo);
-/* Output:
-{
-  cityName: 'London',
-  timezone: 'Europe/London',
-  currentOffset: '+01:00',
-  isDST: true,
-  dstStart: 'BST',
-  region: 'Europe',
-  subregion: 'London'
-}
-*/
-
-// Get all available timezones
-const timezones = WorldTimeConverter.getAvailableTimezones();
-console.log(timezones);
-/* Output:
-[
-  {
-    city: 'London',
-    timezone: 'Europe/London',
-    info: { ... }
-  },
-  ...
-]
-*/
-```
-
-### Locale and Format Support
+### 🌐 Locale Support
 
 ```typescript
 // Format time with specific locale
@@ -229,9 +137,8 @@ console.log(formattedTime);
 // Output: 'vendredi 15 mars 2024 14:30'
 ```
 
-## Types
+## 📋 Type Definitions
 
-### TimeResult
 ```typescript
 interface TimeResult {
   cityName: string;
@@ -245,72 +152,59 @@ interface TimeResult {
   iso8601: string;
   formattedDateTime: string;
 }
-```
 
-### BusinessHours
-```typescript
 interface BusinessHours {
   start: string;     // Format: HH:mm
   end: string;       // Format: HH:mm
   timezone: string;
 }
-```
 
-### HolidayDefinition
-```typescript
 interface HolidayDefinition {
   name: string;
   date: string;      // Format: YYYY-MM-DD
   recurring: boolean;
   type: string;
 }
+
+interface TimezoneInfo {
+  cityName: string;
+  timezone: string;
+  currentOffset: string;
+  isDST: boolean;
+  dstStart: string;
+  region: string;
+  subregion: string;
+}
 ```
 
-## Error Handling
-
-The package throws errors for various scenarios:
+## 🔍 Error Handling
 
 ```typescript
 try {
-  WorldTimeConverter.getCurrentTime('InvalidCity');
+  const time = WorldTimeConverter.getCurrentTime('InvalidCity');
 } catch (error) {
-  console.error(error.message); // "Invalid city name: InvalidCity"
-}
-
-try {
-  WorldTimeConverter.convertTime('invalid-date', 'London', 'Tokyo');
-} catch (error) {
-  console.error(error.message); // "Invalid city name or timestamp"
+  if (error instanceof InvalidCityError) {
+    console.error('Invalid city:', error.message);
+  } else if (error instanceof InvalidTimeFormatError) {
+    console.error('Invalid time format:', error.message);
+  } else {
+    console.error('Unexpected error:', error);
+  }
 }
 ```
 
-## Best Practices
+## 🚀 Best Practices
 
 1. Always use valid city names from the moment-timezone database
 2. Use proper time formats:
    - HH:mm for time (24-hour format)
    - YYYY-MM-DD for dates
 3. Consider DST when working with dates across different seasons
-4. Always handle potential errors with try-catch blocks
+4. Handle timezone edge cases (e.g., DST transitions)
+5. Cache timezone information for frequently used cities
+6. Use Unix timestamps for precise calculations
 
-## Performance Considerations
-
-1. Cache timezone information for frequently used cities
-2. Batch timezone conversions when possible
-3. Use Unix timestamps for precise calculations
-4. Consider using the `epoch` property for time comparisons
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a pull request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## Testing
+## 🛠️ Development
 
 ```bash
 # Install dependencies
@@ -321,12 +215,30 @@ npm test
 
 # Run tests with coverage
 npm test -- --coverage
+
+# Build the project
+npm run build
+
+# Lint the code
+npm run lint
 ```
 
-## License
+## 🤝 Contributing
 
-MIT
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -am 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Credits
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 💬 Support
+
+For support, please [open an issue](https://github.com/yourusername/world-time-converter/issues/new) on GitHub.
+
+## 🙏 Credits
 
 This package uses [Moment.js](https://momentjs.com/) and [Moment Timezone](https://momentjs.com/timezone/) for timezone calculations.

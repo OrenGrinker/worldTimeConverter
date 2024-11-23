@@ -1,6 +1,6 @@
 {
   "name": "world-time-converter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Advanced time conversion and timezone management library with support for business hours, holidays, and locale-specific formatting",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
